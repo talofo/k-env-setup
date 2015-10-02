@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo
+echo "**** Pulling changes... [Hub's post-update hook]"
+echo
+
+case " $1 " in
+*'refs/heads/master'*)
+ cd ~/www/www/ || exit
+ unset GIT_DIR
+ git fetch hub && git reset --hard hub/master
+ echo
+ echo "Master was reset to reflect bare changes. PRAY THE LORD!"
+ echo
+;;
+esac
+exec git-update-server-info
